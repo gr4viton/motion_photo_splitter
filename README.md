@@ -6,7 +6,7 @@ Usefull eg for [samsung motion photo files](https://www.samsung.com/global/galax
 
 ## Install
 
-The package is ready on PYPI, python3.5+ needed.
+The [package is ready to be installed from PYPI](https://pypi.org/project/motion-photo-splitter/), python3.5+ needed.
 
 ```bash
 pip3 install motion-photo-splitter
