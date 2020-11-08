@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-import click
-
 from mmap import mmap
+
+import click
 
 
 @dataclass
