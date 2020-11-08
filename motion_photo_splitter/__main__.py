@@ -13,6 +13,7 @@ class Splitter:
 
     pic_suffix: str = ".jpg"
     vid_suffix: str = ".mp4"
+    path_prefix: str = ""
 
     _megabyte = 1024 ** 2
 
@@ -65,7 +66,7 @@ class Splitter:
         return fbytes
 
     def save_file(self, fname_orig, suffix, fbytes):
-        fname = f"{fname_orig}{suffix}"
+        fname = f"{self.path_prefix}{fname_orig}{suffix}"
         with open(fname, "wb") as fil:
             fil.write(fbytes)
             fsiz = len(fbytes) / self._megabyte
@@ -92,13 +93,22 @@ class Splitter:
 @click.option(
     "--vid-suffix", "vid_suffix", default=".mp4", show_default=True, help="Suffix of the splitted video file."
 )
+@click.option(
+    "--path-prefix", "path_prefix", default="", show_default=True, help="Prefix of the splitted files path - eg to put them in subfolder `out/`."
+)
 @click.argument("filenames", nargs=-1)
 def split_the_motion_files(filenames, **kwargs):
     """Take list of filenames containing joined photo and video and split them in two separate files.
 
     Works for samsung motion photos by default - they contain "MotionPhoto_data" edge marker - but any other marker text can be passed.
 
-    CARE: If you set empty string as the file suffix, the original file gets overwritten!
+    NOTE: how the output file names are constructed:
+
+    `{path_prefix}{fname_orig}{pic_suffix}` - for picture files
+    `{path_prefix}{fname_orig}{vid_suffix}` - for video files
+
+    WARNING: If you set empty string as the file suffix, the original file gets overwritten!
+    WARNING: If using the `path-prefix`, you should create the folders yourself.
     """
     spl = Splitter(**kwargs)
     for fname in filenames:

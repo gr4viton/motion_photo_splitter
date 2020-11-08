@@ -22,7 +22,7 @@ dependency_links = [x.strip().replace('git+', '') for x in all_reqs if 'git+' no
 setup(
     name='motion_photo_splitter',
     description='CLI for splitting motion photo files into separate picture and vide file.',
-    version='1.0.0',
+    version='1.1.0',
     packages=find_packages(),
     install_requires=install_requires,
     python_requires='>=3.5',
